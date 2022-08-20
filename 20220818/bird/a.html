@@ -1,0 +1,74 @@
+#include&lt;iostream&gt;</span>
+<span class="hljs-header">#include&lt;cmath&gt;</span>
+<span class="hljs-header">#include&lt;cstdio&gt;</span>
+<span class="hljs-header">#include&lt;cstring&gt;</span>
+<span class="hljs-header">#include&lt;algorithm&gt;</span>
+using namespace std;
+const int maxn&#61;6600000,maxn1&#61;802;
+int first[<span class="hljs-link_label">maxn</span>],last[<span class="hljs-link_label">maxn</span>],next[<span class="hljs-link_label">maxn</span>],value[<span class="hljs-link_label">maxn</span>],cost[<span class="hljs-link_label">maxn</span>],d[<span class="hljs-link_label">maxn</span>],dui[<span class="hljs-link_label">maxn</span>],bz[<span class="hljs-link_label">maxn</span>],a[<span class="hljs-link_label">maxn1</span>][<span class="hljs-link_reference">maxn1</span>];
+int n,m,num,x,i,t,j,k,l,ans,p,m1;
+void lian(int x,int y,int z,int z1){
+<span class="hljs-code">    last[&#43;&#43;num]&#61;y;value[num]&#61;z;cost[num]&#61;z1,next[num]&#61;first[x];first[x]&#61;num;</span>
+}
+int pan(int x){
+<span class="hljs-code">    if (x%m) return x%m;return m;</span>
+}
+int pan1(int x){
+<span class="hljs-code">    if (x%m) return x/m;return x/m-1;</span>
+}
+int dg(int x,int sum){
+<span class="hljs-code">    if (x&#61;&#61;n&#43;m*maxn1&#43;1){<!-- --></span>
+<span class="hljs-code">        ans&#43;&#61;d[0]*sum;</span>
+<span class="hljs-code">        return sum;</span>
+<span class="hljs-code">    }</span>
+<span class="hljs-code">    int t,k,q&#61;sum,l;</span>
+<span class="hljs-code">    bz[x]&#61;p;</span>
+<span class="hljs-code">    for (t&#61;first[x];t;t&#61;next[t])</span>
+<span class="hljs-code">        if (bz[last[t]]!&#61;p &amp;&amp; d[x]&#61;&#61;d[last[t]]&#43;cost[t] &amp;&amp; value[t]){<!-- --></span>
+<span class="hljs-code">            k&#61;dg(last[t],min(q,value[t]));</span>
+<span class="hljs-code">            if (k){<!-- --></span>
+<span class="hljs-code">                value[t]-&#61;k;</span>
+<span class="hljs-code">                value[dui[t]]&#43;&#61;k;</span>
+<span class="hljs-code">                if (last[t]&#61;&#61;n&#43;m*maxn1&#43;1){<!-- --></span>
+<span class="hljs-code">                    for (i&#61;1;i&lt;&#61;n;i&#43;&#43;){<!-- --></span>
+<span class="hljs-code">                        l&#61;a[i][pan(x-n)]*(pan1(x-n)&#43;2);</span>
+<span class="hljs-code">                        lian(i,x&#43;m,1,l),lian(x&#43;m,i,0,-l),dui[num]&#61;num-1,dui[num-1]&#61;num;</span>
+<span class="hljs-code">                    }</span>
+<span class="hljs-code">                    lian(x&#43;m,n&#43;m*maxn1&#43;1,1,0),lian(n&#43;m*maxn1&#43;1,x&#43;m,0,0),dui[num]&#61;num-1,dui[num-1]&#61;num;</span>
+<span class="hljs-code">                }</span>
+<span class="hljs-code">                q-&#61;k;</span>
+<span class="hljs-code">                if (!q) break;</span>
+<span class="hljs-code">            }</span>
+<span class="hljs-code">        }</span>
+<span class="hljs-code">    return sum-q;</span>
+}
+bool pan(){
+<span class="hljs-code">    if (!p) return true;</span>
+<span class="hljs-code">    int i,j,t,k&#61;maxn,l;</span>
+<span class="hljs-code">    for (i&#61;0;i&lt;&#61;n&#43;m*maxn1&#43;1;i&#43;&#43;)</span>
+<span class="hljs-code">        if (bz[i]&#61;&#61;p)</span>
+<span class="hljs-code">            for (t&#61;first[i];t;t&#61;next[t])</span>
+<span class="hljs-code">                if (bz[last[t]]!&#61;p &amp;&amp; value[t]) k&#61;min(k,d[last[t]]&#43;cost[t]-d[i]);</span>
+<span class="hljs-code">    if (k&#61;&#61;maxn) return false;</span>
+<span class="hljs-code">    for (i&#61;0;i&lt;&#61;n&#43;m*maxn1&#43;1;i&#43;&#43;)</span>
+<span class="hljs-code">        if (bz[i]&#61;&#61;p) d[i]&#43;&#61;k;</span>
+<span class="hljs-code">    return true;</span>
+}
+int main(){
+//  freopen(&#34;data.in&#34;,&#34;r&#34;,stdin);
+<span class="hljs-code">    scanf(&#34;%d%d&#34;,&amp;n,&amp;m);</span>
+<span class="hljs-code">    for (i&#61;1;i&lt;&#61;n;i&#43;&#43;)</span>
+<span class="hljs-code">        scanf(&#34;%d&#34;,&amp;x),lian(0,i,x,0),lian(i,0,0,0),dui[num]&#61;num-1,dui[num-1]&#61;num;</span>
+<span class="hljs-code">    for (i&#61;1;i&lt;&#61;n;i&#43;&#43;)</span>
+<span class="hljs-code">        for (j&#61;1;j&lt;&#61;m;j&#43;&#43;){<!-- --></span>
+<span class="hljs-code">            scanf(&#34;%d&#34;,&amp;x);a[i][j]&#61;x;</span>
+<span class="hljs-code">            lian(i,n&#43;j,1,x),lian(n&#43;j,i,0,-x),dui[num]&#61;num-1,dui[num-1]&#61;num;</span>
+<span class="hljs-code">        }</span>
+<span class="hljs-code">    for (i&#61;n&#43;1;i&lt;&#61;n&#43;m;i&#43;&#43;)</span>
+<span class="hljs-code">        lian(i,n&#43;m*maxn1&#43;1,1,0),lian(n&#43;m*maxn1&#43;1,i,0,0),dui[num]&#61;num-1,dui[num-1]&#61;num;</span>
+<span class="hljs-code">    while (pan()){<!-- --></span>
+<span class="hljs-code">        p&#43;&#43;;</span>
+<span class="hljs-code">        while (dg(0,maxn)) p&#43;&#43;;</span>
+<span class="hljs-code">    }</span>
+<span class="hljs-code">    printf(&#34;%d\n&#34;,ans);</span>
+}

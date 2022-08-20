@@ -1,0 +1,21 @@
+BIOS Information
+        Vendor: LENOVO
+        Version: GIET76WW (2.26 )
+        Release Date: 08/27/2014
+        Address: 0xE0000
+        Runtime Size: 128 kB
+        ROM Size: 16 MB
+        Characteristics:
+                PCI is supported
+                PNP is supported
+                BIOS is upgradeable
+                BIOS shadowing is allowed
+                Boot from CD is supported
+                Selectable boot is supported
+                ACPI is supported
+                USB legacy is supported
+                BIOS boot specification is supported
+                Targeted content distribution is supported
+                UEFI is supported
+        BIOS Revision: 2.26
+        Firmware Revision: 1.13
