@@ -1,0 +1,7 @@
+alias gita="git add -A"
+alias gitc="git commit -a -m \"upd\""
+alias gitp="git push"
+alias cls="git add -A && clear"
+alias compile="g++ -O2 -lm -Wall -std=c++17 -fsanitize=address,undefined -o /workspaces/Code/temp"
+alias run="/workspaces/Code/temp"
+alias mk="cp /workspaces/Code/default.cpp"
