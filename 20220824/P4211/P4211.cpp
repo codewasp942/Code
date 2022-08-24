@@ -41,8 +41,38 @@ namespace io {
 };
 using namespace io;
 
+const int maxn = 5e4 + 5;
+
+struct node;
+typedef node* pos;
+
+struct node {
+	int l, r, val;
+	pos ls, rs;
+};
+
+vector<int> tree[maxn];
+int dfn[maxn], dfn_cnt, son[maxn], siz[maxn], dep[maxn];
+int n, m;
+
+void dfs1(int u, int d) {
+	dep[u] = d; siz[u] = 1;
+	for (int v : tree[u]) {
+		dfs1(v, d + 1);
+		siz[u] += siz[v];
+	}
+}
+
+void dfs2
+
 int main() {
-    freopen(".in", "r", stdin);
-    freopen(".out", "w", stdout);
+    // freopen(".in", "r", stdin);
+    // freopen(".out", "w", stdout);
+	read(n); read(m);
+	for (int i = 0; i < n; i++) {
+		int u; read(u);
+		tree[i].push_back(u);
+	}
+
     return 0;
 }
