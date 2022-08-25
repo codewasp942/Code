@@ -41,8 +41,36 @@ namespace io {
 };
 using namespace io;
 
+const int maxn = 1e6 + 5;
+
+int n, x, p;
+int s[maxn << 2];
+long long ans;
+
 int main() {
     freopen("subway.in", "r", stdin);
     freopen("subway.out", "w", stdout);
-    return 0;
+    read(n); read(x); read(p);
+	for (int i = 1; i <= n; i++) {
+		int t; read(t);
+		t = (t - 1) % (x + p) + 1;
+		s[t]++;
+		s[t + x + p]++;
+	}
+	int cnt_in = 0;
+	long long sum = 0;
+	for (int i = 1; i <= x + p; i++) {
+		if (i <= x) cnt_in += s[i];
+		else sum += 1LL * s[i] * (x + p - i + 1);
+	}
+	ans = sum;
+	for (int i = 2; i <= x + p; i++) {
+		cnt_in += s[i + x - 1];
+		cnt_in -= s[i - 1];
+		sum -= 1LL * s[i + x - 1] * p;
+		sum += n - cnt_in;
+		ans = min(ans, sum);
+	}
+	write(ans);
+	return 0;
 }

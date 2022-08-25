@@ -6,3 +6,4 @@ alias compile="g++ -O2 -lm -Wall -std=c++17 -fsanitize=address,undefined -o /wor
 alias run="/workspaces/Code/temp"
 alias mk="cp /workspaces/Code/default.cpp"
 alias crun="compile *.cpp && run"
+alias gits="gita && gitc && gitp"
