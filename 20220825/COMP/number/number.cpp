@@ -41,8 +41,37 @@ namespace io {
 };
 using namespace io;
 
+const int maxn = 2e5 + 5;
+const long long mod = 998244353;
+
+int n, m, t;
+vector<int> graph[maxn];
+priority_queue<int, vector<int>, less<int> > q;
+int cnt[maxn];
+long long po[maxn], ans;
+
 int main() {
-    freopen(".in", "r", stdin);
-    freopen(".out", "w", stdout);
+    freopen("number.in", "r", stdin);
+    freopen("number.out", "w", stdout);
+	read(n); read(m); read(t);
+	for (int i = 1; i <= m; i++) {
+		int u, v; read(u); read(v);
+		graph[u].push_back(v);
+		cnt[v]++;
+	}
+	po[0] = 1;
+	for (int i = 1; i <= n; i++) {
+		if (!cnt[i]) q.push(i);
+		po[i] = (po[i - 1] * n) % mod;
+	}
+	int tot = n;
+	while (!q.empty()) {
+		int u = q.top(); q.pop();
+		ans += 1LL * u * po[tot--] % mod;
+		ans %= mod;
+		for (int v : graph[u]) if (!(--cnt[v])) q.push(v);
+	}
+	if (tot) write(-1);
+	else write(ans);
     return 0;
 }
