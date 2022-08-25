@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define FILE_IO
+// #define FILE_IO
 namespace io {
 	#ifdef FILE_IO
 	#define FREAD
@@ -41,8 +41,35 @@ namespace io {
 };
 using namespace io;
 
+const long long mod = 998244353;
+
+long long sum(long long x) {
+	if (x < 0) return 0;
+	return (x * (x + 1) / 2) % mod;
+}
+
+long long ssum(long long x) {
+	if (x < 0) return 0;
+	return (x * (x + 1) * (2 * x + 1) / 6) % mod;
+}
+
 int main() {
-    freopen(".in", "r", stdin);
-    freopen(".out", "w", stdout);
+    // freopen(".in", "r", stdin);
+    // freopen(".out", "w", stdout);
+	// for (long long c = 1; c <= 1000; c++) {
+	// 	for (long long i = 1;i <= 10000; i++) {
+	// 		if (i * (i / c) != c * ssum(i / c - 1) + sum(c - 1) * sum(i / c - 1) + (i / c) * (i / c) * (i % c + 1) + sum(i % c)) {
+				
+	// 			write(i, ' ');
+	// 			write(c);
+	// 			return 0;
+	// 		}
+	// 	}
+	// }
+	long long c;
+	read(c);
+	for (long long i = 1; i <= 50; i++) {
+		write(c * ssum(i / c - 1) + sum(c - 1) * sum(i / c - 1) + (i / c) * (i / c) * (i % c + 1) + (i / c) * sum(i % c));
+	}
     return 0;
 }
