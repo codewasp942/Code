@@ -41,8 +41,15 @@ namespace io {
 };
 using namespace io;
 
+const int n[13] = {10, 100, 100, 200, 300, 500, 1e5, 1e5, 1e5, 1e5, 2e5, 1e5, 3e5};
+const int m[13] = {15, 200, 1000, 1000, 1000, 1000, 2e5, 3e5, 2e5, 3e5, 5e5, 5e5, 5e5};
+const long long maxt[13] = {1000, 1000, 1000, 1e9, 1e9, 1e9, 1e12, 1e12, 1e12, 1e15, 1e15, 1e15, 1e15};
+
+char name[50];
+
 int main() {
-    freopen(".in", "r", stdin);
-    freopen(".out", "w", stdout);
+    for (int i = 0; i < 13; i++) {
+		sprintf("%s%d.in", i < 3 ? "sample" : "data", i < 3 ? )
+	}
     return 0;
 }
