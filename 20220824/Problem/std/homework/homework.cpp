@@ -57,8 +57,8 @@ bool check(long long x) {
 }
 
 int main() {
-    freopen("homework.in", "r", stdin);
-    freopen("homework.out", "w", stdout);
+    freopen("../../sample/homework/sample0.in", "r", stdin);
+    freopen("../../sample/homework/sample0.out", "w", stdout);
     read(n); read(m);
 	for (int i = 1; i <= m; i++) {
 		read(t[i]);
