@@ -41,7 +41,7 @@ namespace io {
 };
 using namespace io;
 
-const int maxn = 1e5 + 5;
+const int maxn = 5e5 + 5;
 
 int n, m;
 long long t[maxn], maxt, sum;
@@ -57,8 +57,8 @@ bool check(long long x) {
 }
 
 int main() {
-    freopen("../../sample/homework/sample0.in", "r", stdin);
-    freopen("../../sample/homework/sample0.out", "w", stdout);
+    freopen("../../data/homework/data6.in", "r", stdin);
+    freopen("../../data/homework/data6.out", "w", stdout);
     read(n); read(m);
 	for (int i = 1; i <= m; i++) {
 		read(t[i]);
