@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define FILE_IO
+// #define FILE_IO
 namespace io {
 	#ifdef FILE_IO
 	#define FREAD
@@ -41,8 +41,32 @@ namespace io {
 };
 using namespace io;
 
+const int n[13] = {10, 15, 50, 100, 100, 100, 500, 800, 800, 1000, 1000, 1000, 1000};
+const int m[13] = {50, 75, 500, 1000, 1000, 2000, 10000, 50000, 50000, 100000, 100000, 200000, 200000};
+const int bro[13] = {20, 30, 100, 0, 200, 200, 500, 10000, 20000, 200000, 300000, 400000, 500000};
+const int maxb = 1e6 + 0;
+
+char name[50];
+
 int main() {
-    freopen(".in", "r", stdin);
-    freopen(".out", "w", stdout);
+	random_device seed;
+	mt19937_64 rd(seed());
+    for (int i = 0; i < 13; i++) {
+		sprintf(name, "%s%d.in", i < 3 ? "sample" : "data", i < 3 ? i : i - 3);
+		freopen(name, "w", stdout);
+		write(n[i], ' ');
+		write(m[i]);
+		for (int j = 1; j <= bro[i]; j++) {
+			int u = rd() % n[i] + 1, v = rd() % n[i] + 1;
+			while (u == v) v = rd() % n[i] + 1;
+			write(u, ' '); write(v, ' '); write(0);
+		}
+		for (int j = 1; j <= m[i] - bro[i]; j++) {
+			int u = rd() % n[i] + 1, v = rd() % n[i] + 1;
+			while (u == v) v = rd() % n[i] + 1;
+			int b = rd() % maxb + 1, a = rd() % b + 1;
+		}
+		fclose(stdout);
+	}
     return 0;
 }
