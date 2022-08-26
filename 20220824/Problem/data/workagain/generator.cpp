@@ -41,9 +41,9 @@ namespace io {
 };
 using namespace io;
 
-const int n[13] = {10, 100, 100, 200, 300, 500, 100000, 100000, 100000, 100000, 200000, 100000, 300000};
-const int m[13] = {15, 200, 1000, 1000, 1000, 1000, 200000, 300000, 200000, 300000, 500000, 500000, 500000};
-const long long maxt[13] = {1000, 1000, 1000, 1000000000, 1000000000, 1000000000, 1000000000000, 1000000000000, 1000000000000, 1000000000000, 1000000000000, 1000000000000, 1000000000000};
+const int n[13] = {10, 15, 50, 10, 15, 15, 100, 200, 300, 400, 500, 800, 900};
+const int m[13] = {15, 20, 100, 15, 20, 20, 200, 500, 500, 700, 1000, 1000, 1000};
+const int maxt = 1e6 + 0, maxw = 10;
 
 char name[50];
 
@@ -51,11 +51,20 @@ int main() {
 	random_device seed;
 	mt19937_64 rd(seed());
     for (int i = 0; i < 13; i++) {
+		if (i == 3) continue;
 		sprintf(name, "%s%d.in", i < 3 ? "sample" : "data", i < 3 ? i : i - 3);
 		freopen(name, "w", stdout);
 		write(n[i], ' ');
 		write(m[i]);
-		for (int j = 1; j <= m[i]; j++) write(rd() % maxt[i] + 1, " \n"[j == m[i]]);
+		for (int j = 1; j <= m[i]; j++) write(rd() % maxt, " \n"[j == m[i]]);
+		for (int j = 1; j <= n[i]; j++) {
+			int x = rd() % 199 + 1;
+			double v = 0.0;
+			if (i >= 1 && i <= 5) v = (x % 3 == 0) ? 0.5 : (x % 3 == 1) ? 1.0 : 1.5;
+			else v = double(x) / 100.0;
+			printf("%lf%c", v, " \n"[j == n[i]]);
+		}
+		for (int j = 1; j <= n[i]; j++) write(rd() % (maxw - 3) + 3, " \n"[j == n[i]]);
 		fclose(stdout);
 	}
     return 0;
