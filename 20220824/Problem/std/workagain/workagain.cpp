@@ -41,7 +41,7 @@ namespace io {
 };
 using namespace io;
 
-const int maxn = 1e2 + 5;
+const int maxn = 1e3 + 5;
 
 double dp[maxn], v[maxn], tmp[maxn];
 int n, m;
@@ -59,8 +59,8 @@ int main() {
 	for (int i = 1; i <= n; i++) read(w[i]);
 	for (int i = 1; i <= m; i++) dp[i] = 1e9;
 	for (int i = 1; i <= n; i++) {
-		for (int j = 0; j <= m; j++) {
-			for (int k = min(j, w[i]); k >= 1; k--) {
+		for (int j = m; j >= 0; j--) {
+			for (int k = 1; k <= min(j, w[i]); k++) {
 				dp[j] = min(dp[j], dp[j - k] + v[i] * double(t[j] - t[j - k]));
 			}
 			// printf("%.2lf%c", dp[i][j], " \n"[j == m]);
