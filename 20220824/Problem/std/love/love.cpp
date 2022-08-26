@@ -41,7 +41,7 @@ namespace io {
 };
 using namespace io;
 
-const int maxn = 1e6 + 5;
+const int maxn = 1e3 + 5;
 
 struct frac {
     long long a, b;
@@ -49,13 +49,10 @@ struct frac {
     frac() { a = 0, b = 1; }
     frac(long long x) { a = x, b = 1; }
     frac(long long x, long long y) { a = x, b = y; }
-    frac operator += (frac x) { a = a * x.b + x.a * b, b *= x.b; fix(); return *this; }
-    frac operator -= (frac x) { a = a * x.b - x.a * b, b *= x.b; fix(); return *this; }
     frac operator *= (frac x) { a *= x.a, b *= x.b; fix(); return *this; }
+    bool operator < (frac x) const { return a * x.b < x.a * b; }
 };
 
-frac operator + (frac a, frac b) { return a += b; }
-frac operator - (frac a, frac b) { return a -= b; }
 frac operator * (frac a, frac b) { return a *= b; }
 
 struct node {
@@ -63,34 +60,40 @@ struct node {
     frac x;
 };
 
-vector<node> graph[maxn];
+vector<node> gra[maxn];
+frac graph[maxn][maxn];
 int n, m;
 int cnt[maxn];
 frac dis[maxn];
 queue<int> q;
 vector<int> turn;
-bool vis[maxn];
 
 int main() {
     // freopen(".in", "r", stdin);
     // freopen(".out", "w", stdout);
     read(n); read(m);
+    for (int i = 1; i <= n; i++) graph[i][i] = frac(0);
     for (int i = 1; i <= m; i++) {
-        int u; read(u);
-        node x; read(x.v);
-        read(x.op);
+        int u; node x;
+        read(x.v), read(u), read(x.op);
         if (x.op) read(x.x.a), read(x.x.b);
-        graph[u].push_back(x);
         cnt[x.v]++;
+        gra[u].push_back(x);
     }
-    q.push(1);
-    
-    for (int i = 1; i <= n; i++) if (!cnt[i]) q.push(i);
+    q.push(n);
     while (!q.empty()) {
         int u = q.front(); q.pop();
         turn.push_back(u);
-        for (node e : graph[u]) if (!--cnt[e.v]) q.push(e.v);
+        for (node e : gra[u]) {
+            if (e.op) graph[e.v][u] = max(graph[e.v][u], e.x);
+            else for (int i = 1; i <= n; i++) if (graph[u][i].a) graph[e.v][i].a = graph[e.v][i].b = 1;
+            if (!--cnt[e.v]) q.push(e.v);
+        }
     }
-
+    dis[n] = frac(1);
+    for (int u : turn) for (int i = 1; i <= n; i++) if (graph[u][i].a) dis[u] = max(dis[u], dis[i] * graph[u][i]);
+    if (!dis[1].a) putchar('B'), putchar('E'), putchar('\n');
+    else if (dis[1].a == dis[1].b) putchar('H'), putchar('E'), putchar('\n');
+    else write(dis[1].a, '/'), write(dis[1].b);
     return 0;
 }
