@@ -91,7 +91,7 @@ int main() {
 			}
 		}
 		graph[u].push_back(x);
-		next:
+		next: ;
 	}
 	dfs(1, 0, frac(1));
 	if (!ans.a) putchar('B'), putchar('E'), putchar('\n');
