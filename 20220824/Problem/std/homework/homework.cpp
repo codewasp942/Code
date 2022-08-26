@@ -44,7 +44,17 @@ using namespace io;
 const int maxn = 1e5 + 5;
 
 int n, m;
-int t[maxn], maxt;
+long long t[maxn], maxt, sum;
+
+bool check(long long x) {
+	int cnt = 1;
+	long long tmp = 0;
+	for (int i = 1; i <= m; i++) {
+		if (tmp + t[i] <= x) tmp += t[i];
+		else cnt++, tmp = t[i];
+	}
+	return cnt <= n;
+}
 
 int main() {
     freopen("homework.in", "r", stdin);
@@ -52,8 +62,15 @@ int main() {
     read(n); read(m);
 	for (int i = 1; i <= m; i++) {
 		read(t[i]);
-
+		maxt = max(maxt, t[i]);
+		sum += t[i];
 	}
-	int l, r, mid;
+	long long l = maxt, r = sum, mid;
+	while (l < r) {
+		mid = (l + r) >> 1;
+		if (check(mid)) r = mid;
+		else l = mid + 1;
+	}
+	write(l);
 	return 0;
 }
