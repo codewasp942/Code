@@ -41,31 +41,22 @@ namespace io {
 };
 using namespace io;
 
-const int maxn = 1e2 + 5;
+const int n[13] = {10, 100, 100, 200, 300, 500, 100000, 100000, 100000, 100000, 200000, 100000, 300000};
+const int m[13] = {15, 200, 1000, 1000, 1000, 1000, 200000, 300000, 200000, 300000, 500000, 500000, 500000};
+const long long maxt[13] = {1000, 1000, 1000, 1000000000, 1000000000, 1000000000, 1000000000000, 1000000000000, 1000000000000, 1000000000000, 1000000000000, 1000000000000, 1000000000000};
 
-double dp[maxn], v[maxn], tmp[maxn];
-int n, m;
-int t[maxn], w[maxn];
+char name[50];
 
 int main() {
-    // freopen(".in", "r", stdin);
-    // freopen(".out", "w", stdout);
-	read(n); read(m);
-	for (int i = 1; i <= m; i++) {
-		read(t[i]);
-		t[i] += t[i - 1];
+	random_device seed;
+	mt19937_64 rd(seed());
+    for (int i = 0; i < 13; i++) {
+		sprintf(name, "%s%d.in", i < 3 ? "sample" : "data", i < 3 ? i : i - 3);
+		freopen(name, "w", stdout);
+		write(n[i], ' ');
+		write(m[i]);
+		for (int j = 1; j <= m[i]; j++) write(rd() % maxt[i] + 1, " \n"[j == m[i]]);
+		fclose(stdout);
 	}
-	for (int i = 1; i <= n; i++) scanf("%lf", v + i);
-	for (int i = 1; i <= n; i++) read(w[i]);
-	for (int i = 1; i <= m; i++) dp[i] = 1e9;
-	for (int i = 1; i <= n; i++) {
-		for (int j = 0; j <= m; j++) {
-			for (int k = min(j, w[i]); k >= 1; k--) {
-				dp[j] = min(dp[j], dp[j - k] + v[i] * double(t[j] - t[j - k]));
-			}
-			// printf("%.2lf%c", dp[i][j], " \n"[j == m]);
-		}
-	}
-	printf("%.2lf\n", dp[m]);
     return 0;
 }
