@@ -62,7 +62,7 @@ int main() {
 			double v = 0.0;
 			if (i >= 1 && i <= 5) v = (x % 3 == 0) ? 0.5 : (x % 3 == 1) ? 1.0 : 1.5;
 			else v = double(x) / 100.0;
-			printf("%lf%c", v, " \n"[j == n[i]]);
+			printf("%.2lf%c", v, " \n"[j == n[i]]);
 		}
 		for (int j = 1; j <= n[i]; j++) write(rd() % (maxw - 3) + 3, " \n"[j == n[i]]);
 		fclose(stdout);
