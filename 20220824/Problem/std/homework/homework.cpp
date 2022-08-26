@@ -44,12 +44,16 @@ using namespace io;
 const int maxn = 1e5 + 5;
 
 int n, m;
-int t[maxn];
+int t[maxn], maxt;
 
 int main() {
     freopen("homework.in", "r", stdin);
     freopen("homework.out", "w", stdout);
     read(n); read(m);
-	
+	for (int i = 1; i <= m; i++) {
+		read(t[i]);
+
+	}
+	int l, r, mid;
 	return 0;
 }
