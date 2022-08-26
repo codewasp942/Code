@@ -41,8 +41,31 @@ namespace io {
 };
 using namespace io;
 
+const int maxn = 1e2 + 5;
+
+double dp[maxn][maxn], v[maxn], tmp[maxn];
+int n, m;
+int t[maxn], w[maxn];
+
 int main() {
-    freopen(".in", "r", stdin);
-    freopen(".out", "w", stdout);
+    // freopen(".in", "r", stdin);
+    // freopen(".out", "w", stdout);
+	read(n); read(m);
+	for (int i = 1; i <= m; i++) read(t[i]);
+	for (int i = 1; i <= m; i++) scanf("%lf", v + i);
+	for (int i = 1; i <= n; i++) read(w[i]);
+	for (int i = 0; i <= n; i++)
+		for (int j = 0; j <= m; j++)
+			dp[i][j] = 1e9;
+	dp[0][0] = 0.0;
+	for (int i = 1; i <= n; i++) {
+		for (int j = 0; j <= m; j++) {
+			dp[i][j] = dp[i - 1][j];
+			for (int k = 1; k <= min(j, w[i]); k++) {
+				dp[i][j] = min(dp[i][j], dp[i - 1][j - k] + v[i] * double(t[i]));
+			}
+		}
+	}
+	printf("%.2lf\n", dp[n][m]);
     return 0;
 }
