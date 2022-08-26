@@ -51,20 +51,20 @@ int main() {
     // freopen(".in", "r", stdin);
     // freopen(".out", "w", stdout);
 	read(n); read(m);
-	for (int i = 1; i <= m; i++) read(t[i]);
-	for (int i = 1; i <= n; i++) {
-		scanf("%lf", v + i);
-		v[i] += v[i - 1];
+	for (int i = 1; i <= m; i++) {
+		read(t[i]);
+		t[i] += t[i - 1];
 	}
+	for (int i = 1; i <= n; i++) scanf("%lf", v + i);
 	for (int i = 1; i <= n; i++) read(w[i]);
 	for (int i = 1; i <= m; i++) dp[0][i] = 1e9;
 	for (int i = 1; i <= n; i++) {
 		for (int j = 0; j <= m; j++) {
 			dp[i][j] = dp[i - 1][j];
 			for (int k = 1; k <= min(j, w[i]); k++) {
-				dp[i][j] = min(dp[i][j], dp[i - 1][j - k] + (v[j] - v[j - k]) * double(t[i]));
+				dp[i][j] = min(dp[i][j], dp[i - 1][j - k] + v[i] * double(t[j] - t[j - k]));
 			}
-			printf("%.2lf%c", dp[i][j], " \n"[j == m]);
+			// printf("%.2lf%c", dp[i][j], " \n"[j == m]);
 		}
 	}
 	printf("%.2lf\n", dp[n][m]);
