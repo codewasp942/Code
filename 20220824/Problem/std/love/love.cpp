@@ -45,15 +45,17 @@ const int maxn = 1e6 + 5;
 
 struct frac {
     long long a, b;
-    void fix() { long long d = __gcd(a, b); a /= d; b /= d; }
+    void fix() { if (a == 0) return void(b = 1); long long d = __gcd(a, b); a /= d; b /= d; }
     frac() { a = 0, b = 1; }
     frac(long long x) { a = x, b = 1; }
     frac(long long x, long long y) { a = x, b = y; }
     frac operator += (frac x) { a = a * x.b + x.a * b, b *= x.b; fix(); return *this; }
+    frac operator -= (frac x) { a = a * x.b - x.a * b, b *= x.b; fix(); return *this; }
     frac operator *= (frac x) { a *= x.a, b *= x.b; fix(); return *this; }
 };
 
 frac operator + (frac a, frac b) { return a += b; }
+frac operator - (frac a, frac b) { return a -= b; }
 frac operator * (frac a, frac b) { return a *= b; }
 
 struct node {
@@ -63,12 +65,11 @@ struct node {
 
 vector<node> graph[maxn];
 int n, m;
-
-void dfs(int u) {
-    for (node e : graph[u]) {
-        
-    }
-}
+int cnt[maxn];
+frac dis[maxn];
+queue<int> q;
+vector<int> turn;
+bool vis[maxn];
 
 int main() {
     // freopen(".in", "r", stdin);
@@ -80,7 +81,16 @@ int main() {
         read(x.op);
         if (x.op) read(x.x.a), read(x.x.b);
         graph[u].push_back(x);
+        cnt[x.v]++;
     }
+    q.push(1);
     
+    for (int i = 1; i <= n; i++) if (!cnt[i]) q.push(i);
+    while (!q.empty()) {
+        int u = q.front(); q.pop();
+        turn.push_back(u);
+        for (node e : graph[u]) if (!--cnt[e.v]) q.push(e.v);
+    }
+
     return 0;
 }
