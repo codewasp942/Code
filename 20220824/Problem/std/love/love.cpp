@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define FILE_IO
+// #define FILE_IO
 namespace io {
 	#ifdef FILE_IO
 	#define FREAD
