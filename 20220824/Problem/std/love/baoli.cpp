@@ -76,8 +76,8 @@ void dfs(int u, int bro, frac dis) {
 }
 
 int main() {
-    // freopen(".in", "r", stdin);
-    // freopen(".out", "w", stdout);
+    // freopen("../../sample/love/sample0.in", "r", stdin);
+    // freopen("../../sample/love/sample0.out", "w", stdout);
 	read(n); read(m);
 	for (int i = 1; i <= m; i++) {
 		int u; read(u);

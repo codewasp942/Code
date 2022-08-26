@@ -48,8 +48,8 @@ int n, m;
 int t[maxn], w[maxn];
 
 int main() {
-    freopen("../../data/workagain/data9.in", "r", stdin);
-    freopen("../../data/workagain/data9.out", "w", stdout);
+    freopen("workagain.in", "r", stdin);
+    freopen("workagain.out", "w", stdout);
 	read(n); read(m);
 	for (int i = 1; i <= m; i++) {
 		read(t[i]);
