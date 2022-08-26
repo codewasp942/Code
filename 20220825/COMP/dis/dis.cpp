@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// #define FILE_IO
+#define FILE_IO
 namespace io {
 	#ifdef FILE_IO
 	#define FREAD
@@ -53,34 +53,30 @@ long long ssum(long long x) {
 	return (x * (x + 1) * (2 * x + 1) / 6) % mod;
 }
 
+long long n, q, ans;
+
 int main() {
-    // freopen(".in", "r", stdin);
-    // freopen(".out", "w", stdout);
-	// for (long long c = 1; c <= 1000; c++) {
-	// 	long long ans = 0;
-	// 	for (long long i = 1;i <= 10000; i++) {
-	// 		ans += i * (i / c);
-	// 		ans %= mod;
-	// 		if (ans != (c * ssum(i / c - 1) * c + sum(c - 1) * sum(i / c - 1) + c * (i / c) * (i / c) * (i % c + 1) + (i / c) * sum(i % c)) % mod) {
-	// 			write(i); write(c);
-	// 			write(ans, ' ');
-	// 			write((c * ssum(i / c - 1) + sum(c - 1) * sum(i / c - 1) + (i / c) * (i / c) * (i % c + 1) + (i / c) * sum(i % c)) % mod);
-	// 			return 0;
-	// 		}
-	// 	}
-	// }
-	long long c, ans = 0;
-	read(c);
-	for (long long i = 1; i <= 50; i++) {
-		// ans += i * (i % c);
-		write(i * (i % c));
-		// write(ans);
-		// write(c * ssum(i / c - 1) * c + sum(c - 1) * sum(i / c - 1) + c * (i / c) * (i / c) * (i % c + 1) + (i / c) * sum(i % c));
-		s=i^2,d=i*c 
-		4 + 2c + 4c
-		9
-		16
-		25
+    // freopen("dis.in", "r", stdin);
+    // freopen("dis.out", "w", stdout);
+	read(n); read(q);
+	for (long long i = 1; i <= q; i++) {
+		long long a, b, c;
+		read(a); read(b); read(c);
+		if (b * c < a) a = b, c = 1;
+		ans += a * (c * ssum(n / c - 1) * c % mod + sum(c - 1) * sum(n / c - 1) % mod + c * (n / c) * (n / c) * (n % c + 1) % mod + (n / c) * sum(n % c) % mod) % mod;
+		ans %= mod;
+		ans += b * (sum(n / c - 1) * c * sum(c - 1) % mod + ssum(c - 1) * (n / c) % mod + sum(n % c) * c * (n / c) % mod + ssum(n % c)) % mod;
+		ans %= mod;
 	}
+	write(ans);
+	// long long c, ans = 0;
+	// read(c);
+	// for (long long i = 1; i <= 50; i++) {
+	// 	ans += i * (i % c);
+	// 	// write(i * (i % c));
+	// 	write(ans, ' ');
+	// 	// write(c * ssum(i / c - 1) * c + sum(c - 1) * sum(i / c - 1) + c * (i / c) * (i / c) * (i % c + 1) + (i / c) * sum(i % c));
+	// 	write(sum(i / c - 1) * c * sum(c - 1) + ssum(c - 1) * (i / c - 1) + sum(i % c) * c * (i / c) + ssum(i % c) + ssum(c - 1));
+	// }
     return 0;
 }

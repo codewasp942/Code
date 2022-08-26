@@ -44,8 +44,8 @@ using namespace io;
 long long n;
 
 int main() {
-    freopen("midian.in", "r", stdin);
-    freopen("midian.out", "w", stdout);
+    // freopen("midian.in", "r", stdin);
+    // freopen("midian.out", "w", stdout);
 	read(n);
 	if (n & 1LL) write(((n + 1LL) >> 1) + n);
 	else write((n >> 1LL) + n);

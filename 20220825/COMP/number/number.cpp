@@ -51,8 +51,8 @@ int cnt[maxn];
 long long po[maxn], ans;
 
 int main() {
-    freopen("number.in", "r", stdin);
-    freopen("number.out", "w", stdout);
+    // freopen("number.in", "r", stdin);
+    // freopen("number.out", "w", stdout);
 	read(n); read(m); read(t);
 	for (int i = 1; i <= m; i++) {
 		int u, v; read(u); read(v);

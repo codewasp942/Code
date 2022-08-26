@@ -48,8 +48,8 @@ int s[maxn << 2];
 long long ans;
 
 int main() {
-    freopen("subway.in", "r", stdin);
-    freopen("subway.out", "w", stdout);
+    // freopen("subway.in", "r", stdin);
+    // freopen("subway.out", "w", stdout);
     read(n); read(x); read(p);
 	for (int i = 1; i <= n; i++) {
 		int t; read(t);
