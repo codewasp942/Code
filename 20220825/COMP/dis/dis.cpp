@@ -57,19 +57,30 @@ int main() {
     // freopen(".in", "r", stdin);
     // freopen(".out", "w", stdout);
 	// for (long long c = 1; c <= 1000; c++) {
+	// 	long long ans = 0;
 	// 	for (long long i = 1;i <= 10000; i++) {
-	// 		if (i * (i / c) != c * ssum(i / c - 1) + sum(c - 1) * sum(i / c - 1) + (i / c) * (i / c) * (i % c + 1) + sum(i % c)) {
-				
-	// 			write(i, ' ');
-	// 			write(c);
+	// 		ans += i * (i / c);
+	// 		ans %= mod;
+	// 		if (ans != (c * ssum(i / c - 1) * c + sum(c - 1) * sum(i / c - 1) + c * (i / c) * (i / c) * (i % c + 1) + (i / c) * sum(i % c)) % mod) {
+	// 			write(i); write(c);
+	// 			write(ans, ' ');
+	// 			write((c * ssum(i / c - 1) + sum(c - 1) * sum(i / c - 1) + (i / c) * (i / c) * (i % c + 1) + (i / c) * sum(i % c)) % mod);
 	// 			return 0;
 	// 		}
 	// 	}
 	// }
-	long long c;
+	long long c, ans = 0;
 	read(c);
 	for (long long i = 1; i <= 50; i++) {
-		write(c * ssum(i / c - 1) + sum(c - 1) * sum(i / c - 1) + (i / c) * (i / c) * (i % c + 1) + (i / c) * sum(i % c));
+		// ans += i * (i % c);
+		write(i * (i % c));
+		// write(ans);
+		// write(c * ssum(i / c - 1) * c + sum(c - 1) * sum(i / c - 1) + c * (i / c) * (i / c) * (i % c + 1) + (i / c) * sum(i % c));
+		s=i^2,d=i*c 
+		4 + 2c + 4c
+		9
+		16
+		25
 	}
     return 0;
 }
