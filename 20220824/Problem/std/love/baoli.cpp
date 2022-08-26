@@ -79,11 +79,19 @@ int main() {
     // freopen(".in", "r", stdin);
     // freopen(".out", "w", stdout);
 	read(n); read(m);
-	for (int i = 1; i <= n; i++) {
+	for (int i = 1; i <= m; i++) {
 		int u; read(u);
 		node x; read(x.v); read(x.op);
 		if (x.op) read(x.x.a), read(x.x.b);
+		else x.x.a = x.x.b = 1;
+		for (node &t : graph[u]) {
+			if (t.v == x.v) {
+				t.x = max(t.x, x.x);
+				goto next;
+			}
+		}
 		graph[u].push_back(x);
+		next:
 	}
 	dfs(1, 0, frac(1));
 	if (!ans.a) putchar('B'), putchar('E'), putchar('\n');

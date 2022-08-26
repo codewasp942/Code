@@ -66,7 +66,7 @@ int main() {
 			while (u == v) v = rd() % n[i] + 1;
 			int b = rd() % maxb + 1, a = rd() % (b - 1) + 1;
 			write(u, ' '); write(v, ' '); write(1, ' ');
-			write(a, ' '); write(b, ' ');
+			write(a, ' '); write(b);
 		}
 		fclose(stdout);
 	}
